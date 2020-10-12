@@ -2,7 +2,7 @@
 # Cross Platform Makefile
 # Compatible with MSYS2/MINGW, Ubuntu 14.04.1 and Mac OS X
 #
-# Important: This is a "null back-end" application, with no visible output or interaction!
+# Important: This is a "null backend" application, with no visible output or interaction!
 # This is used for testing purpose and continuous integration, and has little use for end-user.
 #
 
@@ -40,7 +40,10 @@ endif
 ifeq ($(UNAME_S), Linux) #LINUX
 	ECHO_MESSAGE = "Linux"
 	ifneq ($(WITH_EXTRA_WARNINGS), 0)
-		CXXFLAGS += -Wextra -pedantic
+		CXXFLAGS += -Wextra -Wpedantic
+		ifeq ($(shell $(CXX) -v 2>&1 | grep -c "clang version"), 1)
+			CXXFLAGS += -Wshadow -Wsign-conversion
+		endif
 	endif
 	CFLAGS = $(CXXFLAGS)
 endif
@@ -56,7 +59,7 @@ endif
 ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
 	ECHO_MESSAGE = "MinGW"
 	ifneq ($(WITH_EXTRA_WARNINGS), 0)
-		CXXFLAGS += -Wextra -pedantic
+		CXXFLAGS += -Wextra -Wpedantic
 	endif
 	CFLAGS = $(CXXFLAGS)
 endif

@@ -1,7 +1,7 @@
-// dear imgui: Renderer for modern OpenGL with shaders / programmatic pipeline
+// dear imgui: Renderer Backend for modern OpenGL with shaders / programmatic pipeline
 // - Desktop GL: 2.x 3.x 4.x
 // - Embedded GL: ES 2.0 (WebGL 1.0), ES 3.0 (WebGL 2.0)
-// This needs to be used along with a Platform Binding (e.g. GLFW, SDL, Win32, custom..)
+// This needs to be used along with a Platform Backend (e.g. GLFW, SDL, Win32, custom..)
 
 // Implemented features:
 //  [X] Renderer: User texture binding. Use 'GLuint' OpenGL texture identifier as void*/ImTextureID. Read the FAQ about ImTextureID!
@@ -49,6 +49,7 @@ IMGUI_IMPL_API void     ImGui_ImplOpenGL3_DestroyDeviceObjects();
  && !defined(IMGUI_IMPL_OPENGL_LOADER_GL3W) \
  && !defined(IMGUI_IMPL_OPENGL_LOADER_GLEW) \
  && !defined(IMGUI_IMPL_OPENGL_LOADER_GLAD) \
+ && !defined(IMGUI_IMPL_OPENGL_LOADER_GLAD2) \
  && !defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING2) \
  && !defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING3) \
  && !defined(IMGUI_IMPL_OPENGL_LOADER_CUSTOM)
@@ -68,6 +69,8 @@ IMGUI_IMPL_API void     ImGui_ImplOpenGL3_DestroyDeviceObjects();
     #define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #elif __has_include(<glad/glad.h>)
     #define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#elif __has_include(<glad/gl.h>)
+    #define IMGUI_IMPL_OPENGL_LOADER_GLAD2
 #elif __has_include(<GL/gl3w.h>)
     #define IMGUI_IMPL_OPENGL_LOADER_GL3W
 #elif __has_include(<glbinding/glbinding.h>)

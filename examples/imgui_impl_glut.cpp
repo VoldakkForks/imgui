@@ -1,4 +1,4 @@
-// dear imgui: Platform Binding for GLUT/FreeGLUT
+// dear imgui: Platform Backend for GLUT/FreeGLUT
 // This needs to be used along with a Renderer (e.g. OpenGL2)
 
 // !!! GLUT/FreeGLUT IS OBSOLETE SOFTWARE. Using GLUT is not recommended unless you really miss the 90's. !!!
@@ -25,9 +25,9 @@
 #include "imgui.h"
 #include "imgui_impl_glut.h"
 #ifdef __APPLE__
-    #include <GLUT/glut.h>
+#include <GLUT/glut.h>
 #else
-    #include <GL/freeglut.h>
+#include <GL/freeglut.h>
 #endif
 
 #ifdef _MSC_VER
@@ -41,9 +41,9 @@ bool ImGui_ImplGLUT_Init()
     ImGuiIO& io = ImGui::GetIO();
 
 #ifdef FREEGLUT
-    io.BackendPlatformName ="imgui_impl_glut (freeglut)";
+    io.BackendPlatformName = "imgui_impl_glut (freeglut)";
 #else
-    io.BackendPlatformName ="imgui_impl_glut";
+    io.BackendPlatformName = "imgui_impl_glut";
 #endif
 
     g_Time = 0;
